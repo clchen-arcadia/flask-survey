@@ -3,12 +3,10 @@
 {% block content %}
 
   <h1>Thanks for completing this survey!</h1>
-  {% for tuple in qa_tuples %}
+  {% for question, answer in qa_tuples %}
 
-  <li><span style="font-weight: bold">{{tuple[0]}}</span> {{tuple[1]}}</li>
+  <li><span style="font-weight: bold">{{question}}</span> {{answer}}</li>
 
   {% endfor %}
-
-
 
 {% endblock %}

@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = "never-tell!"
 
 debug = DebugToolbarExtension(app)
 
-answers = []
+responses = []
 
 
 @app.get('/')
@@ -27,24 +27,28 @@ def get_landing_page():
 @app.post('/begin')
 def handle_start_btn():
     """Handles survey start button"""
+    responses.clear()
 
     return redirect("/question/0")
 
-@app.post('/answer/<int:q_idx>')
+
+@app.post('/response/<int:q_idx>')
 def handle_survey_continuation(q_idx):
     """Handles next question continuation"""
-    answer = request.form.get("answer")
+    response = request.form.get("response")
 
-    answers.append(answer)
-
-    # how_many_answers = len(answers)
+    responses.append(response)
+    print("responses ------------------>", responses)
 
     q_idx += 1
 
     if(q_idx < len(survey.questions)):
         return redirect(f'/question/{q_idx}')
     else:
-        return redirect('/completion.html')
+        qa_tuples = [(p1.question, p2) for idx1, p1 in enumerate(survey.questions)
+        for idx2, p2 in enumerate(responses) if idx1 == idx2]
+        
+        return render_template('/completion.html', qa_tuples = qa_tuples)
 
 @app.get('/question/<int:q_idx>')
 def load_questions_page(q_idx):
@@ -59,3 +63,4 @@ def load_questions_page(q_idx):
         choices = choices,
         q_idx = q_idx
     )
+

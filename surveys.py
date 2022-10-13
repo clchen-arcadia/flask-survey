@@ -26,7 +26,6 @@ class Survey:
         instructions = textual instructions
         question = list of Question instances: [q1, q2, ...]
         """
-
         self.title = title
         self.instructions = instructions
         self.questions = questions

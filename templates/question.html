@@ -3,13 +3,13 @@
 
   <h1>{{ question.question }}</h1>
 
-  <form action="/answer/{{ q_idx }}" method="POST">
+  <form action="/response/{{ q_idx }}" method="POST">
       {% for choice in choices %}
       <p>
         <input
             type="radio"
-            name="answer"
-            value="value-goes-here">
+            name="response"
+            value="{{ choice }}">
         {{ choice }}
       </p>
       {% endfor %}

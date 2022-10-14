@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% for msg in get_flashed_messages() %}
+<p>{{ msg }}</p>
+{% endfor %}
+
   <h1>{{ question.question }}</h1>
 
-  <form action="/response/{{ q_idx }}" method="POST">
+  <form action="/response/" method="POST">
       {% for choice in choices %}
       <p>
         <input

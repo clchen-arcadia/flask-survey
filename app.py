@@ -71,7 +71,7 @@ def load_questions_page(q_idx_url):
 
     # for completion page
     if q_idx >= len(survey.questions):
-        qa_tuples = [  # TODO - name better
+        qa_tuples = [
             (question.question, response)
             for ques_idx, question in enumerate(survey.questions)
             for resp_idx, response in enumerate(session["responses"])
